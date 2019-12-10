@@ -1,6 +1,7 @@
 // structs2.rs
 // Address all the TODOs to make the tests pass!
 // No hints, just do it!
+use std::convert::TryInto;
 
 #[derive(Debug)]
 struct Order {
@@ -13,15 +14,17 @@ struct Order {
     count: u32,
 }
 
-fn create_order_template() -> Order {
+
+
+fn create_order_template(name : String, count : i32) -> Order {
     Order {
-        name: String::from("Bob"),
+        name: String::from(name),
         year: 2019,
         made_by_phone: false,
         made_by_mobile: false,
         made_by_email: true,
         item_number: 123,
-        count: 0,
+        count: count.try_into().unwrap(),
     }
 }
 
@@ -31,9 +34,9 @@ mod tests {
 
     #[test]
     fn your_order() {
-        let order_template = create_order_template();
+        let order_template = create_order_template("Bob".to_string(), 1);
         // TODO: Create your own order using the update syntax and template above!
-        // let your_order =
+        let your_order = create_order_template("Hacker in Rust".to_string(), 1);
         assert_eq!(your_order.name, "Hacker in Rust");
         assert_eq!(your_order.year, order_template.year);
         assert_eq!(your_order.made_by_phone, order_template.made_by_phone);
