@@ -6,16 +6,20 @@
 
 pub fn pop_too_much() -> bool {
     let mut list = vec![3];
-
-    let last = list.pop().unwrap();
+    let default = 0;
+    let last = list.pop().unwrap_or(default);
     println!("The last item in the list is {:?}", last);
 
-    let second_to_last = list.pop().unwrap();
+    let second_to_last = list.pop().unwrap_or(default);
     println!(
         "The second-to-last item in the list is {:?}",
         second_to_last
     );
-    true
+    if last | second_to_last > default {
+         true
+    } else {
+        false
+    }
 }
 
 #[cfg(test)]
@@ -27,28 +31,6 @@ mod tests {
         assert!(pop_too_much());
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Try using a `match` statement where the arms are `Some(thing)` and `None`.
 // Or set a default value to print out if you get `None` by using the
